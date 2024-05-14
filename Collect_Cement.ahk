@@ -14,7 +14,7 @@ Gui, Add, Text, x10 y10 w280 h60 vStatusText cBlack, Script is running! Press F5
 Gui, Add, Text, x10 y80 w280 h20 vDebugText cYellow, Debug Information:
 Gui, Add, Text, x10 y100 w280 h20 vDebugInfo cYellow, Debug Information Display here!
 
-Gui, Show, x0 y0 w300 h130, Cement Collector Version 0.4
+Gui, Show, x0 y0 w300 h130, Cement Collector: Version 0.4
 WinSet, Transparent, 150, A 
 
 
