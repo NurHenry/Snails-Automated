@@ -3,19 +3,24 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 
 
+
 ; ----------------------------- GUI ----------------------------- 
 
 
 Gui +LastFound +AlwaysOnTop +ToolWindow 
 Gui, Color, 808080 
-Gui, Add, Text, x10 y10 w280 h60 vStatusText cWhite, Script is running! Press F5 to start! Press F9 to cancel
+Gui, Add, Text, x10 y10 w280 h60 vStatusText cBlack, Script is running! Press F5 to start! Press F9 to cancel
 
 Gui, Add, Text, x10 y80 w280 h20 vDebugText cYellow, Debug Information:
-Gui, Add, Text, x10 y100 w280 h20 vDebugInfo cYellow, this is it
+Gui, Add, Text, x10 y100 w280 h20 vDebugInfo cYellow, Debug Information Display here!
 
 Gui, Show, x0 y0 w300 h130, Snail Collection Script
 WinSet, Transparent, 150, A 
 
+
+; ----------------------------- Iteration Logic -----------------------------
+
+current_iteration := 0
 
 ; ----------------------------- Functions -----------------------------
 
@@ -66,11 +71,15 @@ first_snail() {
     Send, {A up}
 }
 
-collection_loop() {
+collection_loop(num_its) {
 
     UpdateDebug("Collecting the Cement...")
 
-    Loop 48 {
+    Loop %num_its% {
+
+        current_iteration := A_Index
+        UpdateDebug("Collected Snails: " . current_iteration . "/" . num_its)
+
         Sleep 1500 ; small break
 
         SendInput, f ; open inv from snail
@@ -141,67 +150,31 @@ collect_and_store() {
 }
 
 
+; ----------------------------- Run_row -----------------------------
+
+
+run_row(row_number) {
+    Sleep 2000
+    kill_respawn(row_number)
+    Sleep 2000
+    first_snail()
+    Sleep 2000
+    collection_loop(48)
+    Sleep 2000
+    collect_and_store()
+}
+
 ; ----------------------------- Worker -----------------------------
 
 
 F5:: 
 Loop {
-    
-    Sleep 2000
-
-; ------ Row 1 ------
-    kill_respawn(1)
-    Sleep 2000
-    first_snail()
-    Sleep 2000
-    collection_loop()
-    Sleep 2000
-    collect_and_store()
-
-    Sleep 2000
-
-; ------ Row 2 ------
-    kill_respawn(2)
-    Sleep 2000
-    first_snail()
-    Sleep 2000
-    collection_loop()
-    Sleep 2000
-    collect_and_store()
-
-    Sleep 2000
-
-; ------ Row 3 ------
-    kill_respawn(3)
-    Sleep 2000
-    first_snail()
-    Sleep 2000
-    collection_loop()
-    Sleep 2000
-    collect_and_store()
-
-    Sleep 2000
-
-; ------ Row 4 ------
-    kill_respawn(4)
-    Sleep 2000
-    first_snail()
-    Sleep 2000
-    collection_loop()
-    Sleep 2000
-    collect_and_store()
-
-    Sleep 2000
-
-; ------ Row 5 ------
-    kill_respawn(5)
-    Sleep 2000
-    first_snail()
-    Sleep 2000
-    collection_loop()
-    Sleep 2000
-    collect_and_store()
+    run_row(1)
+    run_row(2)
+    run_row(3)
+    run_row(4)
+    run_row(5)
 }
 
-F9:
+F9::
 ExitApp
