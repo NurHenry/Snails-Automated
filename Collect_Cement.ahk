@@ -33,6 +33,7 @@ kill_respawn(bednumber) {
 
     UpdateDebug("Killing the Player. Spawn at Row:" bednumber)
 
+    Sleep 3000
     SendInput, i ; open inv
     Sleep 1000
     
@@ -98,13 +99,13 @@ collection_loop(num_its) {
         Sleep 500
     
         MouseMove, -500, 0, 50, R
-        Sleep 500
+        Sleep 2500
     
         SendInput, e
         Sleep 700
     
         Send {W down} 
-        Sleep 580
+        Sleep 545
         Send {W up} 
         Sleep 500
     
@@ -144,9 +145,11 @@ collect_and_store() {
     Send {W up} 
     Sleep 2000
 
-    SendInput, e
+    SendInput, e ; store the CP
 
     SoundBeep, 400, 300 
+
+    Sleep 2000
 }
 
 
@@ -159,7 +162,7 @@ run_row(row_number) {
     Sleep 2000
     first_snail()
     Sleep 2000
-    collection_loop(48)
+    collection_loop(49)
     Sleep 2000
     collect_and_store()
 }

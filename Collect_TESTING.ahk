@@ -30,9 +30,11 @@ UpdateDebug(debugText) {
 }
 
 kill_respawn(bednumber) {
-
+    UpdateDebug("at sleep beginn soon")
+    Sleep 2000 ; ------------ NEW CHECK
     UpdateDebug("Killing the Player. Spawn at Row:" bednumber)
 
+    Sleep 1000 ; ----------------NEW CHECK
     SendInput, i ; open inv
     Sleep 1000
     
@@ -80,16 +82,16 @@ collection_loop(num_its) {
         current_iteration := A_Index
         UpdateDebug("Collected Snails: " . current_iteration . "/" . num_its)
 
-        Sleep 1500 ; small break
+        Sleep 500 ; small break
 
         MouseMove, -500, 0, 50, R
-        Sleep 500
+        Sleep 2000 ; --------- NEW  CHECKJ
     
         SendInput, e
-        Sleep 700
+        Sleep 500
     
         Send {W down} 
-        Sleep 580
+        Sleep 545 ; ------- NEW CHECK
         Send {W up} 
         Sleep 500
     
@@ -99,25 +101,27 @@ collection_loop(num_its) {
 
 collect_and_store() {
 
-    UpdateDebug("Collect last snail + store the Cement...")
-
+    UpdateDebug("Collect and store beginn (at sleep)")
     Sleep 2000 ; small break after loop
-
-    SoundBeep, 400, 300 ; indicator loop is over
 
     MouseMove, -500, 0, 50, R
     Sleep 2000
 
+    UpdateDebug("go forward")
     Send {W down} 
     Sleep 200
     Send {W up} 
     Sleep 2000
 
+    UpdateDebug("Inside Inventory in sleep")
     SendInput, e
-    SoundBeep, 400, 300 
-    Sleep 10000
+    Sleep 5000
 
-    SendInput, ESC
+    UpdateDebug(" go out of inv")
+    Send {ESC}
+    SoundBeep, 400, 300 
+    UpdateDebug("is out of inv!!!!")
+    Sleep 2000
 }
 
 
@@ -130,7 +134,7 @@ run_row(row_number) {
     Sleep 2000
     first_snail()
     Sleep 2000
-    collection_loop(48)
+    collection_loop(49) ; ----------------- NEW APROVED
     Sleep 2000
     collect_and_store()
 }
