@@ -9,7 +9,7 @@ SetWorkingDir %A_ScriptDir%
 
 Gui +LastFound +AlwaysOnTop +ToolWindow 
 Gui, Color, 808080 
-Gui, Add, Text, x10 y10 w280 h60 vStatusText cBlack, Script is running! Press F5 to start! Press F9 to cancel
+Gui, Add, Text, x10 y10 w280 h60 vStatusText cBlack, THIS IS THE DEBUG VERSION!!!! F5 to start! F9 to cancel
 
 Gui, Add, Text, x10 y80 w280 h20 vDebugText cYellow, Debug Information:
 Gui, Add, Text, x10 y100 w280 h20 vDebugInfo cYellow, Debug Information Display here!
@@ -82,21 +82,6 @@ collection_loop(num_its) {
 
         Sleep 1500 ; small break
 
-        SendInput, f ; open inv from snail
-        Sleep 1000
-    
-        Click, 1263, 197 ;go in search bar
-        Sleep 1000
-    
-        SendInput, paste
-        Sleep 500
-    
-        Click, 1382, 199 ; transfer all 
-        Sleep 500
-    
-        Send {ESC}
-        Sleep 500
-    
         MouseMove, -500, 0, 50, R
         Sleep 500
     
@@ -120,22 +105,6 @@ collect_and_store() {
 
     SoundBeep, 400, 300 ; indicator loop is over
 
-    SendInput, f ; open inv last time
-
-    Sleep 2000
-
-    Click, 1263, 197 ;go in search bar
-    Sleep 1000
-
-    SendInput, paste
-    Sleep 2000
-
-    Click, 1382, 199 ; transfer all 
-    Sleep 2000
-
-    Send {ESC}
-    Sleep 2000
-
     MouseMove, -500, 0, 50, R
     Sleep 2000
 
@@ -145,12 +114,14 @@ collect_and_store() {
     Sleep 2000
 
     SendInput, e
-
     SoundBeep, 400, 300 
+    Sleep 10000
+
+    SendInput, ESC
 }
 
 
-; ----------------------------- Run_row -----------------------------
+; ----------------------------- All Functions Together Clusterd (runrow) -----------------------------
 
 
 run_row(row_number) {
