@@ -14,7 +14,7 @@ Gui, Add, Text, x10 y10 w280 h60 vStatusText cBlack, THIS IS THE DEBUG VERSION!!
 Gui, Add, Text, x10 y80 w280 h20 vDebugText cYellow, Debug Information:
 Gui, Add, Text, x10 y100 w280 h20 vDebugInfo cYellow, Debug Information Display here!
 
-Gui, Show, x0 y0 w300 h130, Snail Collection Script
+Gui, Show, x0 y0 w300 h130, DEV BUILD
 WinSet, Transparent, 150, A 
 
 
